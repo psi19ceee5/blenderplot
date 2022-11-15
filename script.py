@@ -69,93 +69,98 @@ def rainbow(a):
             ]
         )
 
-
-# Variables
-mesh_width = int(width/mesh_res)
-mesh_height = int(height/mesh_res)
-tex_width = int(width/tex_res)
-tex_height = int(height/tex_res)
-size = 2
-aspect_ratio = width/height
-
-# Check if object exists (and clear animation data)
-object_exists = False
-for obj in bpy.context.scene.objects :
-    if obj.name == 'Surface Plot' :
-        object_exists = True
-        obj.animation_data_clear()
-
-# Create and name a grid
-if object_exists == False :
-    bpy.ops.mesh.primitive_grid_add(x_subdivisions=mesh_width, y_subdivisions=mesh_height ,size=size, location=(0, 0, 0))
-plotObject = bpy.context.active_object
-plotObject.name = 'Surface Plot'
-
-# Size grid  properly
-plotObject.scale[0] = aspect_ratio
-plotObject.scale[1] = 1
-
-# Generate a displace and diffuse map
-displace_image = bpy.data.images.new("Displace Map", width=tex_width, height=tex_height)
-diffuse_image = bpy.data.images.new("Diffuse Map", width=tex_width, height=tex_height)
-
-frame = int(sys.argv[10])
-nframes = int(sys.argv[11])
-
-phi = frame*(phimax - phimin)/nframes
-
-displace_pixels = [None] * tex_width * tex_height
-diffuse_pixels = [None] * tex_width * tex_height
-
-for x in range(tex_width) :
-    for y in range(tex_height) :
-        a = get_data(x, y, phi)
-        displace_pixels[(y * tex_width) + x] = [a, a, a, 1.0]
+def main():
     
-        r, g, b = get_color(x, y, phi)
-        diffuse_pixels[(y * tex_width) + x] = [r, g, b, 1.0]
+    # Variables
+    mesh_width = int(width/mesh_res)
+    mesh_height = int(height/mesh_res)
+    tex_width = int(width/tex_res)
+    tex_height = int(height/tex_res)
+    size = 2
+    aspect_ratio = width/height
 
-displace_pixels = [chan for px in displace_pixels for chan in px]
-diffuse_pixels = [chan for px in diffuse_pixels for chan in px]
+    # Delete Cube
+    bpy.ops.object.delete(use_global=False, confirm=False)
+    
+    # Create and name a grid
+    bpy.ops.mesh.primitive_grid_add(x_subdivisions=mesh_width, y_subdivisions=mesh_height ,size=size, location=(0, 0, 0))
 
-displace_image.pixels = displace_pixels
-diffuse_image.pixels = diffuse_pixels
+    plotObject = bpy.context.active_object
+    plotObject.name = 'Surface_Plot'
 
-# Create a displace texture
-displace_map = bpy.data.textures.new('Displace Texture', type='IMAGE')
-displace_map.image = displace_image
+    # Size grid  properly
+    plotObject.scale[0] = aspect_ratio
+    plotObject.scale[1] = 1
 
-# Create a displace modifier
-plotObject.modifiers.clear()
-displace_mode = plotObject.modifiers.new("Displace", type='DISPLACE')
-displace_mode.texture = displace_map
-displace_mode.strength = z_height
+    # Generate a displace and diffuse map
+    displace_image = bpy.data.images.new("Displace_Map", width=tex_width, height=tex_height)
+    diffuse_image = bpy.data.images.new("Diffuse_Map", width=tex_width, height=tex_height)
 
+    time = 3.1415/2.
+    period = 2*3.1415
 
-# Create a material
-material = bpy.data.materials.new(name="Plot Material")
-# Use nodes
-material.use_nodes = True
-# Add Principled BSDF
-bsdf = material.node_tree.nodes["Principled BSDF"]
-# Add an ImageTexture
-diffuse_map = material.node_tree.nodes.new('ShaderNodeTexImage')
-# Set diffuse image
-diffuse_map.image = diffuse_image
-# Link ImageTexture to Principled BSDF
-material.node_tree.links.new(bsdf.inputs['Base Color'], diffuse_map.outputs['Color'])
+    phi = time*(phimax - phimin)/period
 
+    displace_pixels = [None] * tex_width * tex_height
+    diffuse_pixels = [None] * tex_width * tex_height
 
+    for x in range(tex_width) :
+        for y in range(tex_height) :
+            a = get_data(x, y, phi)
+            displace_pixels[(y * tex_width) + x] = [a, a, a, 1.0]
 
-# Assign it to object
-if plotObject.data.materials :
-    plotObject.data.materials[0] = material
-else :
-    plotObject.data.materials.append(material)
+            r, g, b = get_color(x, y, phi)
+            diffuse_pixels[(y * tex_width) + x] = [r, g, b, 1.0]
 
+    displace_pixels = [chan for px in displace_pixels for chan in px]
+    diffuse_pixels = [chan for px in diffuse_pixels for chan in px]
 
+    displace_image.pixels = displace_pixels
+    diffuse_image.pixels = diffuse_pixels
+            
+    displace_image.filepath_raw = '//img/Displace_Map.png'
+    displace_image.file_format = 'PNG'
+    displace_image.save()
 
-# Shade smooth
-mesh = bpy.context.active_object.data
-for f in mesh.polygons :
-    f.use_smooth = True
+    diffuse_image.filepath_raw = '//img/Diffuse_Map.png'
+    diffuse_image.file_format = 'PNG'
+    diffuse_image.save()
+
+    # Create a displace texture
+    displace_map = bpy.data.textures.new('Displace_Texture', type='IMAGE')
+    displace_map.image = displace_image
+
+    # Create a displace modifier
+    plotObject.modifiers.clear()
+    displace_mode = plotObject.modifiers.new("Displace", type='DISPLACE')
+    displace_mode.texture = displace_map
+    displace_mode.strength = z_height
+
+    # Create a material
+    material = bpy.data.materials.new(name="Plot_Material")
+    # Use nodes
+    material.use_nodes = True
+    # Add Principled BSDF
+    bsdf = material.node_tree.nodes["Principled BSDF"]
+    # Add an ImageTexture
+    diffuse_map = material.node_tree.nodes.new('ShaderNodeTexImage')
+    # Set diffuse image
+    diffuse_map.image = diffuse_image
+    # Link ImageTexture to Principled BSDF
+    material.node_tree.links.new(bsdf.inputs['Base Color'], diffuse_map.outputs['Color'])
+
+    # Assign it to object
+    if plotObject.data.materials :
+        plotObject.data.materials[0] = material
+    else :
+        plotObject.data.materials.append(material)
+
+    # Shade smooth
+    mesh = bpy.context.active_object.data
+    for f in mesh.polygons :
+        f.use_smooth = True
+
+    bpy.ops.wm.save_as_mainfile(filepath="/home/philip/BlenderModels/4DPlot/4Dplot.blend")
+
+if __name__ == "__main__" :
+    main()
