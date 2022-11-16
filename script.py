@@ -1,6 +1,11 @@
 import bpy
 import sys
 from math import *
+import numpy as np
+
+# Constants
+PI = pi
+D2R = PI/180.
 
 # Settings
 width = 800
@@ -11,7 +16,7 @@ mesh_res = 4    # Mesh resolution (8:1)
 
 fps = 24
 phimin = 0
-phimax = 2*pi
+phimax = 2*PI
 
 # Change to return data (should be between 0-1)
 scale = 20
@@ -82,6 +87,11 @@ def main():
     # Delete Cube
     bpy.ops.object.delete(use_global=False, confirm=False)
     
+    # Position Camera
+    camera = bpy.data.objects['Camera']
+    camera.location = [3.44, -1.83, 2.37]
+    camera.rotation_euler = np.array([56.2, 0., 61.5])*D2R
+    
     # Create and name a grid
     bpy.ops.mesh.primitive_grid_add(x_subdivisions=mesh_width, y_subdivisions=mesh_height ,size=size, location=(0, 0, 0))
 
@@ -96,8 +106,8 @@ def main():
     displace_image = bpy.data.images.new("Displace_Map", width=tex_width, height=tex_height)
     diffuse_image = bpy.data.images.new("Diffuse_Map", width=tex_width, height=tex_height)
 
-    time = 3.1415/2.
-    period = 2*3.1415
+    time = PI/2.
+    period = 2*PI
 
     phi = time*(phimax - phimin)/period
 
@@ -132,9 +142,9 @@ def main():
 
     # Create a displace modifier
     plotObject.modifiers.clear()
-    displace_mode = plotObject.modifiers.new("Displace", type='DISPLACE')
-    displace_mode.texture = displace_map
-    displace_mode.strength = z_height
+    displace_mod = plotObject.modifiers.new("Displace", type='DISPLACE')
+    displace_mod.texture = displace_map
+    displace_mod.strength = z_height
 
     # Create a material
     material = bpy.data.materials.new(name="Plot_Material")
@@ -159,6 +169,9 @@ def main():
     mesh = bpy.context.active_object.data
     for f in mesh.polygons :
         f.use_smooth = True
+        
+    bpy.context.scene.render.engine = 'CYCLES'
+    bpy.context.scene.cycles.device = 'GPU'
 
     bpy.ops.wm.save_as_mainfile(filepath="/home/philip/BlenderModels/4DPlot/4Dplot.blend")
 
