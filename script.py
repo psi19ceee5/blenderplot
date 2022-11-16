@@ -92,6 +92,11 @@ def main():
     camera.location = [3.44, -1.83, 2.37]
     camera.rotation_euler = np.array([56.2, 0., 61.5])*D2R
     
+    # Set background lighting to zero
+    world = bpy.data.worlds["World"]
+    world.node_tree.nodes["Background"].inputs[1].default_value = 0
+
+    
     # Create and name a grid
     bpy.ops.mesh.primitive_grid_add(x_subdivisions=mesh_width, y_subdivisions=mesh_height ,size=size, location=(0, 0, 0))
 
