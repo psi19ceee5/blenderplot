@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FPS=24
-SEC=5
+SEC=4
 
 FRAMES=$(echo "$FPS * $SEC" | bc)
 

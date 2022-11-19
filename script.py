@@ -31,7 +31,7 @@ def get_data(x, y, frame, fps):
     phi = (time/period)*(phimax - phimin)
     
     r = math.sqrt(x**2+y**2)
-    return (math.sin(r - phi)+1)/2
+    return (math.sin(r - phi) + 0.3*math.sin(x - 2*phi) + 0.15*math.sin(y - 4*phi) + 1.45)/2.9
 
 # Change to get color (you can use the ones defined below)
 def get_color(x, y, frame, fps):
