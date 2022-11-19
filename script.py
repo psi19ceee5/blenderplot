@@ -31,7 +31,7 @@ def get_data(x, y, frame, fps):
     phi = (time/period)*(phimax - phimin)
     
     r = math.sqrt(x**2+y**2)
-    return (math.sin(r + phi)+1)/2
+    return (math.sin(r - phi)+1)/2
 
 # Change to get color (you can use the ones defined below)
 def get_color(x, y, frame, fps):
@@ -181,9 +181,10 @@ def main():
         f.use_smooth = True
         
     bpy.context.scene.render.engine = 'CYCLES'
+    bpy.context.preferences.addons["cycles"].preferences.compute_device_type = "OPTIX"
     bpy.context.scene.cycles.device = 'GPU'
 
-    bpy.ops.wm.save_as_mainfile(filepath="/home/philip/BlenderModels/4DPlot/4Dplot.blend")
+    # bpy.ops.wm.save_as_mainfile(filepath="/home/philip/BlenderModels/4DPlot/4Dplot.blend")
 
 if __name__ == "__main__" :
     main()
