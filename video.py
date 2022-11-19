@@ -37,7 +37,9 @@ def main() :
         #    assign it to SEQUENCE_EDITOR?
 
         images = []
-        for file in os.listdir(sys.argv[11]) :
+        filelist = os.listdir(argdir)
+        filelist.sort()
+        for file in filelist :
             if file.endswith(".png") :
                 images.append(file)
 
@@ -53,12 +55,14 @@ def main() :
 
         scene = bpy.context.scene
         scene.render.fps = math.floor(fps)
-        scene.frame_start = 1
-        scene.frame_end = tot_frames
+        scene.frame_start = 0
+        scene.frame_end = tot_frames - 1
         scene.render.image_settings.file_format = 'FFMPEG'
         scene.render.ffmpeg.format = 'MPEG4'
         scene.render.ffmpeg.constant_rate_factor = 'PERC_LOSSLESS'
         scene.render.filepath = '//video/'
+
+        #bpy.ops.wm.save_as_mainfile(filepath='//4DplotVE.blend')
 
 if __name__ == "__main__" :
     main()
