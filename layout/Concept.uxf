@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>200</x>
+      <y>1070</y>
+      <w>60</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>950</x>
+      <y>930</y>
+      <w>180</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>application
+(blenderplot)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>490</x>
+      <y>750</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>config files (yaml)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>90</x>
+      <y>850</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>GUI (?)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>130</x>
+      <y>880</y>
+      <w>150</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+interacts with GUI</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0;50.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>810</y>
+      <w>580</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+reads and writes directly to config file (?)
+</panel_attributes>
+    <additional_attributes>280.0;10.0;280.0;270.0;10.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>740</y>
+      <w>370</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+GUI reads and writes config file</panel_attributes>
+    <additional_attributes>350.0;20.0;10.0;20.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>110</x>
+      <y>680</y>
+      <w>1000</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+GUI launches application</panel_attributes>
+    <additional_attributes>980.0;260.0;980.0;20.0;10.0;20.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>620</x>
+      <y>790</y>
+      <w>590</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+application reads from config</panel_attributes>
+    <additional_attributes>370.0;150.0;370.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>1010</y>
+      <w>940</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+starts application directly (?)</panel_attributes>
+    <additional_attributes>720.0;10.0;720.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>1050</y>
+      <w>100</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1530</x>
+      <y>640</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>image file
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1530</x>
+      <y>850</y>
+      <w>170</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>collection of frames
+
+
+
+
+
+
+
+
+
+
+
+...</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1880</x>
+      <y>940</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>video file
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1540</x>
+      <y>890</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>image (frame)
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1540</x>
+      <y>930</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>image (frame)
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1540</x>
+      <y>970</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>image (frame)
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1540</x>
+      <y>1010</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>image (frame)
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1120</x>
+      <y>960</y>
+      <w>240</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+output depends on config</panel_attributes>
+    <additional_attributes>220.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1330</x>
+      <y>660</y>
+      <w>220</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+config: image</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0;10.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1330</x>
+      <y>960</y>
+      <w>220</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+config: video</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1690</x>
+      <y>960</y>
+      <w>210</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+application compiles</panel_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1330</x>
+      <y>970</y>
+      <w>220</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+config: blender file</panel_attributes>
+    <additional_attributes>200.0;240.0;10.0;240.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1530</x>
+      <y>1190</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>blenderfile
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>980</x>
+      <y>1140</y>
+      <w>170</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>API:
+get_data()-Method</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>1140</y>
+      <w>730</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+user implements get_data()-Method</panel_attributes>
+    <additional_attributes>710.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1050</x>
+      <y>1020</y>
+      <w>30</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+</diagram>
